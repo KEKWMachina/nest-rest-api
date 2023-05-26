@@ -9,9 +9,9 @@ import { UserModel } from 'src/models/users.model';
 @Injectable()
 export class UsersService {
   private users: UserModel[] = [
-    { userId: 11, name: 'Nickname' },
-    { userId: 22, name: 'Blankname' },
-    { userId: 33, name: 'Testname' },
+    { userId: 11, name: 'Nickname', password: 'test1' },
+    { userId: 22, name: 'Blankname', password: 'test2' },
+    { userId: 33, name: 'Testname', password: 'test3' },
   ];
 
   public getUsers(): UserModel[] {
@@ -22,7 +22,7 @@ export class UsersService {
     const user = this.users.find((user) => user.userId === id);
 
     if (!user) {
-      throw new NotFoundException('Post not found.');
+      throw new NotFoundException('User not found.');
     }
 
     return user;
@@ -41,7 +41,11 @@ export class UsersService {
 
     const maxId: number = Math.max(...this.users.map((user) => user.userId), 0);
     const newId: number = maxId + 1;
-    const createdUser = { userId: newId, name: newUser.name };
+    const createdUser = {
+      userId: newId,
+      name: newUser.name,
+      password: newUser.password,
+    };
 
     this.users.push(createdUser);
 
