@@ -6,19 +6,21 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 
 import { EmployeeService } from './employee.service';
-import { CreateEmployeeDto } from 'src/dto/create-employee.dto';
-import { UpdateEmployeeDto } from 'src/dto/update-employee.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { Employee } from './entities/employee.entity';
 
 @Controller('employee')
+@UseGuards(AuthGuard)
 export class EmployeeController {
   constructor(private readonly employeeService: EmployeeService) {}
 
   @Post()
-  create(@Body() createEmployeeDto: CreateEmployeeDto) {
-    return this.employeeService.create(createEmployeeDto);
+  create(@Body() createEmployee: Employee) {
+    return this.employeeService.create(createEmployee);
   }
 
   @Get()
@@ -32,11 +34,8 @@ export class EmployeeController {
   }
 
   @Put(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateEmployeeDto: UpdateEmployeeDto,
-  ) {
-    return this.employeeService.update(id, updateEmployeeDto);
+  update(@Param('id') id: string, @Body() updateEmployee: Employee) {
+    return this.employeeService.update(id, updateEmployee);
   }
 
   @Delete(':id')

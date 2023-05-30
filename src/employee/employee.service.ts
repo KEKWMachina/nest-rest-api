@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateEmployeeDto } from 'src/dto/create-employee.dto';
-import { UpdateEmployeeDto } from 'src/dto/update-employee.dto';
-import { Employee, EmployeeDocument } from 'src/schemas/employee.shema';
+import {
+  Employee,
+  EmployeeDocument,
+} from 'src/employee/schemas/employee.shema';
 
 @Injectable()
 export class EmployeeService {
@@ -12,10 +13,8 @@ export class EmployeeService {
     private readonly employeeModel: Model<EmployeeDocument>,
   ) {}
 
-  async create(
-    createEmployeeDto: CreateEmployeeDto,
-  ): Promise<EmployeeDocument> {
-    const employee = new this.employeeModel(createEmployeeDto);
+  async create(createEmployee: Employee): Promise<EmployeeDocument> {
+    const employee = new this.employeeModel(createEmployee);
     return employee.save();
   }
 
@@ -29,9 +28,9 @@ export class EmployeeService {
 
   async update(
     id: string,
-    updateEmployeeDto: UpdateEmployeeDto,
+    updateEmployee: Employee,
   ): Promise<EmployeeDocument> {
-    return this.employeeModel.findByIdAndUpdate(id, updateEmployeeDto);
+    return this.employeeModel.findByIdAndUpdate(id, updateEmployee);
   }
 
   async remove(id: string) {

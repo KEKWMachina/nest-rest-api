@@ -3,7 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 
 import { EmployeeService } from './employee.service';
 import { EmployeeController } from './employee.controller';
-import { Employee, EmployeeSchema } from 'src/schemas/employee.shema';
+import { Employee, EmployeeSchema } from 'src/employee/schemas/employee.shema';
 
 @Module({
   imports: [

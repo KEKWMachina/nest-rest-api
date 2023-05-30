@@ -7,12 +7,15 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 
 import { PostsService } from './posts.service';
 import { PostModel } from 'src/models/post.model';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Controller('posts')
+@UseGuards(AuthGuard)
 export class PostsController {
   constructor(private postsService: PostsService) {}
 
