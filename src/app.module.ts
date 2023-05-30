@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 
 import { PostsModule } from './posts/posts.module';
-import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EmployeeModule } from './employee/employee.module';
@@ -14,7 +13,6 @@ import { EmployersModule } from './employers/employers.module';
       isGlobal: true,
     }),
     PostsModule,
-    UsersModule,
     AuthModule,
     EmployeeModule,
     MongooseModule.forRoot(
